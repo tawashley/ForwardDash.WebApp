@@ -1,25 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
-import { getDateSegments } from '../../utils/date.utils'
+import { useForwardDash } from '../../context/forward-dash.context'
 
 import './dateTime.widget.scss'
 
 export const DateTimeWidget = () => {
-    const [date, setDate] = useState(getDateSegments());
-    const [tickTock, setTickTock] = useState(true)
-
-    function tick() {
-        setDate(getDateSegments());
-        setTickTock(!tickTock)
-    }
-
-    useEffect(() => {
-        var timerID = setInterval(() => tick(), 1000);
-
-        return function cleanup() {
-            clearInterval(timerID);
-        };
-    })
+    const { clock } = useForwardDash()
+    const { date, tickTock } = clock
 
     return (
         <section className="widget-date-time">
