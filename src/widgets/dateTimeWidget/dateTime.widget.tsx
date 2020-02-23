@@ -1,21 +1,29 @@
 import React from 'react'
 
-import { useForwardDash } from '../../context/forward-dash.context'
+import { useClock, ClockProvider } from '../../context/clock.context'
 
 import './dateTime.widget.scss'
 
-export const DateTimeWidget = () => {
-    const { clock } = useForwardDash()
-    const { date, tickTock } = clock
+const DateTimeWidgetContainer = () => {
+    const { date, tickTock } = useClock()
+    const { weekDay, dayString, monthLong, year, minutes, hour } = date
 
     return (
         <section className="widget-date-time">
             <h1 className="widget-date-time__date">
-                {date.weekDay} {date.dayString} {date.monthLong} {date.year}
+                {weekDay} {dayString} {monthLong} {year}
             </h1>
             <p className="widget-date-time__time">
-                {date.hour}{tickTock ? ':' : ' ' }{date.minutes}
+                {hour}{tickTock ? ':' : ' ' }{minutes}
             </p>
         </section>
+    )
+}
+
+export const DateTimeWidget = () => {
+    return (
+        <ClockProvider>
+            <DateTimeWidgetContainer />
+        </ClockProvider>
     )
 }

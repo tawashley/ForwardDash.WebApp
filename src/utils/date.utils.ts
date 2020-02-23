@@ -69,6 +69,6 @@ export function getDateSegments(isoString?: string | Date) {
         minutes: minutes,
         hourMinutes: [hour, minutes].join(':'),
         fullDate: [day, month, year].join('-'),
-        date
+        dateObj: date
     };
 }
