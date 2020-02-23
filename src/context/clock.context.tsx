@@ -1,4 +1,4 @@
-import React, { createContext, useContext, FC, useEffect, useState, useMemo, ReactNode } from 'react';
+import React, { createContext, useContext, FC, useEffect, useState, useMemo } from 'react';
 import { getDateSegments } from '../utils/date.utils'
 
 interface ClockState {
