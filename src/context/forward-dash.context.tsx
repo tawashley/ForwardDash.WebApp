@@ -1,4 +1,4 @@
-import React, { createContext, useContext, FC, useEffect, useState } from 'react';
+import React, { createContext, useContext, FC, useEffect, useState, useMemo } from 'react';
 import { getDateSegments } from '../utils/date.utils'
 
 interface ForwardDashState {
@@ -49,8 +49,18 @@ export const ForwardDashProvider: FC = ({ children }) => {
         };
     })
 
+    const contextValue = useMemo<ForwardDashState>(() => {
+        return {
+            ...inititalForwardDashState,
+            clock: {
+                date,
+                tickTock
+            }
+        };
+      }, [date, tickTock]);
+
     return (
-        <ForwardDashContext.Provider value={{ ...inititalForwardDashState, clock: { date, tickTock } }}>
+        <ForwardDashContext.Provider value={contextValue}>
             {children}
         </ForwardDashContext.Provider>
     )
