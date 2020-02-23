@@ -7,7 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import { App } from './app'
 
 const client = new ApolloClient({
-  uri: '//forward-dash-graphql.herokuapp.com',
+  uri: 'https://forward-dash-graphql.herokuapp.com/graphql',
 });
 
 const Main = () => {
