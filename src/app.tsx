@@ -12,7 +12,7 @@ const testQuery = gql`
     }
 `
 
-function App() {
+export function App() {
     const { data } = useQuery(testQuery)
 
     useEffect(() => {
@@ -33,4 +33,3 @@ function App() {
         </main>
     );
 }
-export default App;
