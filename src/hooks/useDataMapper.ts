@@ -1,22 +1,65 @@
 import { useState, useEffect } from 'react'
+import { useQuery, QueryHookOptions } from '@apollo/react-hooks';
+import { DocumentNode, OperationVariables } from 'apollo-boost';
+import { QueryResult } from '@apollo/react-common'
+
+interface MappingQueryOptions<TData, TVariables, TMapped> {
+    /**
+     * The query document. This is passed to `useQuery`
+     */
+    query: DocumentNode,
+    /**
+     * The query options object. This is passed to `useQuery`
+     */
+    options: QueryHookOptions<TData, TVariables>,
+    /**
+     * The mapping function.
+     *
+     * Takes in the raw, unmapped query result data and returns the mapped data
+     */
+    mapFunction: (data: TData) => TMapped
+}
 
 /**
- * Map `data` from one struct to another using provided `mapFunction`
+ * Using the passed in `query` and (optional) `options` object, make a query using `useQuery`.
+ *
+ * Once completed, pass the data to the `mapFunction`
+ *
+ * Returns a tuple of the mapped data, the is loading state and the full query object from `useQuery`
  *
  * @example
+ * // simple query
+ * const [mappedData, isLoading, apolloResult] = useMappingQuery<Query, Variables, MappedData>({
+ *     query: queryDocument,
+ *     mapFunction: (data) => data.key
+ * })
  *
- * const mappedData = useDataMapper<DataType, MappedDataType>(data as DataType, data => data.really.long.object.data)
+ * // a more complex query
+ * const [mappedData, isLoading, apolloResult] = useMappingQuery<Query, Variables, MappedData>({
+ *     query: queryDocument,
+ *     options: {
+ *         variables: {
+ *             channel: 'cars'
+ *         }
+ *     },
+ *     mapFunction: (data) => {
+ *         const vehicleAge = getVehicleAge(data.vehicle.registrationDate)
+ *         //... any additional logic
+ *         return mappedData;
+ *     }
+ * })
  */
-export const useDataMapper = <TData, TMapped>(isQueryLoading: boolean, data: TData, mapFunction: (data: TData) => TMapped): [TMapped, boolean] => {
-    const [mappedData, setMappedData] = useState<TMapped>({} as TMapped)
+export const useMappingQuery = <TData = any, TVariables = OperationVariables, TMappedData = any>({ query, options = {}, mapFunction }: MappingQueryOptions<TData, TVariables, TMappedData>): [TMappedData, boolean, QueryResult<TData, TVariables>] => {
+    const apolloResult = useQuery<TData, TVariables>(query, options)
+    const [mappedData, setMappedData] = useState<TMappedData>({} as TMappedData)
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if (data && !isQueryLoading) {
-            setMappedData(mapFunction(data))
+        if (apolloResult.data && !apolloResult.loading) {
+            setMappedData(mapFunction(apolloResult.data))
             setIsLoading(false)
         }
-    }, [data, isQueryLoading, mapFunction])
+    }, [apolloResult.data, apolloResult.loading, mapFunction])
 
-    return [mappedData, isLoading]
+    return [mappedData, isLoading, apolloResult]
 }

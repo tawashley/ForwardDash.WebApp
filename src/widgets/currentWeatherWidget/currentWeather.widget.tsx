@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react'
-import { useQuery } from '@apollo/react-hooks'
 
-import { useDataMapper } from '../../hooks/useDataMapper'
+import { useMappingQuery } from '../../hooks/useDataMapper'
 
 import { currentWeatherQuery } from './currentWeather.query'
 import { CurrentWeather, CurrentWeatherVariables, CurrentWeather_weather_current } from './__generated__/CurrentWeather'
@@ -9,22 +8,15 @@ import { CurrentWeather, CurrentWeatherVariables, CurrentWeather_weather_current
 import './currentWeather.scss'
 
 export const CurrentWeatherWidget = () => {
-    const { data, loading } = useQuery<CurrentWeather, CurrentWeatherVariables>(currentWeatherQuery, {
-        variables: {
-            location: 'London'
-        }
+    const [{ condition, temperature, feelsLike, humidityPercentage }, isLoading] = useMappingQuery<CurrentWeather, CurrentWeatherVariables, CurrentWeather_weather_current>({
+        query: currentWeatherQuery,
+        options: {
+            variables: {
+                location: 'London'
+            }
+        },
+        mapFunction: (data) => data.weather.current
     })
-
-    const [currentForecast, isLoading] = useDataMapper<CurrentWeather, CurrentWeather_weather_current>(loading, data as CurrentWeather, (data) => {
-        return data.weather.current
-    })
-
-    const {
-        temperature,
-        feelsLike,
-        condition,
-        humidityPercentage
-    } = currentForecast
 
     return (
         <section className="widget-current-weather">
