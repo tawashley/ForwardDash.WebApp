@@ -1,0 +1,27 @@
+.widget-current-weather {
+    display: flex;
+    align-items: center;
+}
+
+.widget-current-weather__main-panel {
+    display: flex;
+    margin-left: 16px;
+}
+
+.widget-current-weather__temperature {
+    font-size: 64px;
+}
+
+.widget-current-weather__symbol {
+    font-size: 24px;
+    margin-top: 8px;
+}
+
+.widget-current-weather__side-panel {
+    margin-left: 16px;
+}
+
+.widget-current-weather__condition {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
