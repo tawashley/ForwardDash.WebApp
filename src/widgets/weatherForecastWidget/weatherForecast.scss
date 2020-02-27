@@ -1,7 +1,19 @@
+.widget-weather-forecast,
+.widget-weather-forecast__forecast {
+    display: flex;
+    width: 100%;
+}
+
 .widget-weather-forecast__forecast {
     list-style: none;
+}
 
-    li + li {
-        margin-top: 20px;
-    }
+.widget-weather-forecast__forecast-item {
+    flex-grow: 1;
+    justify-items: center;
+    text-align: center;
+}
+
+.widget-weather-forecast__forest-info {
+    margin-top: auto;
 }

@@ -27,8 +27,14 @@ export const WeatherForecastWidget = () => {
                 <ul className="widget-weather-forecast__forecast">
                     {weeklyForecast.map((dayForecast, index) => {
                         return (
-                            <li>
-                                { dayForecast.date }: {dayForecast.condition.text} (min - { dayForecast.minTemperature.celsius } °C) (max - { dayForecast.maxTemperature.celsius } °C)
+                            <li className="widget-weather-forecast__forecast-item">
+                                <p>{dayForecast.condition.text}</p>
+                                <img src={dayForecast.condition.iconSrc} alt={dayForecast.condition.text} />
+                                <div className="widget-weather-forecast__forest-info">
+                                    <p>{dayForecast.condition.text}</p>
+                                    <p>Max: { dayForecast.maxTemperature.celsius } °C</p>
+                                    <p>Min: { dayForecast.minTemperature.celsius } °C</p>
+                                </div>
                             </li>
                         )
                     })}

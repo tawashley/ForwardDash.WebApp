@@ -1,0 +1,52 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: sans-serif;
+}
+
+.dash-container {
+    padding: 16px;
+    height: 100vh;
+}
+
+.dash-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.dash-grid {
+    display: flex;
+    flex: 1;
+    background: #EEE;
+
+    & + & {
+        margin-top: 16px;
+    }
+}
+
+.dash-grid--content-height {
+    flex: 0;
+}
+
+.dash-grid--pattern-left-showcase {
+    :first-child {
+        flex: 1;
+    }
+}
+
+.dash-grid--even-fill {
+    > * {
+        display: flex;
+        flex: 1;
+    }
+}
+
+.forward-dash-content > * {
+    background: #EEE;
+}

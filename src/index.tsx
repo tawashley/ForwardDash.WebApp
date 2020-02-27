@@ -4,7 +4,7 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 import * as serviceWorker from './serviceWorker';
-import { App } from './app'
+import { ForwardDash } from './forward-dash'
 
 const client = new ApolloClient({
   uri: 'https://forward-dash-graphql.herokuapp.com/graphql',
@@ -13,7 +13,7 @@ const client = new ApolloClient({
 const Main = () => {
     return (
         <ApolloProvider client={client}>
-            <App />
+            <ForwardDash />
         </ApolloProvider>
     )
 }
