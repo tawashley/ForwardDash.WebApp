@@ -29,13 +29,13 @@ interface MappingQueryOptions<TData, TVariables, TMapped> {
  *
  * @example
  * // simple query
- * const [mappedData, isLoading, apolloResult] = useMappingQuery<Query, Variables, MappedData>({
+ * const [mappedData, isLoading, apolloResult] = useMappingQuery<Query, MappedData, Variables>({
  *     query: queryDocument,
  *     mapFunction: (data) => data.key
  * })
  *
  * // a more complex query
- * const [mappedData, isLoading, apolloResult] = useMappingQuery<Query, Variables, MappedData>({
+ * const [mappedData, isLoading, apolloResult] = useMappingQuery<Query, MappedData, Variables>({
  *     query: queryDocument,
  *     options: {
  *         variables: {
@@ -49,7 +49,7 @@ interface MappingQueryOptions<TData, TVariables, TMapped> {
  *     }
  * })
  */
-export const useMappingQuery = <TData = any, TVariables = OperationVariables, TMappedData = any>({ query, options = {}, mapFunction }: MappingQueryOptions<TData, TVariables, TMappedData>): [TMappedData, boolean, QueryResult<TData, TVariables>] => {
+export const useMappingQuery = <TData = any, TMappedData = any, TVariables = OperationVariables>({ query, options = {}, mapFunction }: MappingQueryOptions<TData, TVariables, TMappedData>): [TMappedData, boolean, QueryResult<TData, TVariables>] => {
     const apolloResult = useQuery<TData, TVariables>(query, options)
     const [mappedData, setMappedData] = useState<TMappedData>({} as TMappedData)
     const [isLoading, setIsLoading] = useState(true);

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-import { useMappingQuery } from '../../hooks/useDataMapper'
+import { useMappingQuery } from '../../hooks/useMappingQuery'
 
 import { currentWeatherQuery } from './currentWeather.query'
 import { CurrentWeather, CurrentWeatherVariables, CurrentWeather_weather_current } from './__generated__/CurrentWeather'
@@ -8,7 +8,7 @@ import { CurrentWeather, CurrentWeatherVariables, CurrentWeather_weather_current
 import './currentWeather.scss'
 
 export const CurrentWeatherWidget = () => {
-    const [{ condition, temperature, feelsLike, humidityPercentage }, isLoading] = useMappingQuery<CurrentWeather, CurrentWeatherVariables, CurrentWeather_weather_current>({
+    const [{ condition, temperature, feelsLike, humidityPercentage }, isLoading] = useMappingQuery<CurrentWeather, CurrentWeather_weather_current, CurrentWeatherVariables>({
         query: currentWeatherQuery,
         options: {
             variables: {
