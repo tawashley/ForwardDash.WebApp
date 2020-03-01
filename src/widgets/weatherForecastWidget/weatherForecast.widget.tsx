@@ -27,7 +27,7 @@ export const WeatherForecastWidget = () => {
                 <ul className="widget-weather-forecast__forecast">
                     {weeklyForecast.map((dayForecast, index) => {
                         return (
-                            <li className="widget-weather-forecast__forecast-item">
+                            <li className="widget-weather-forecast__forecast-item" key={index}>
                                 <p>{dayForecast.condition.text}</p>
                                 <img src={dayForecast.condition.iconSrc} alt={dayForecast.condition.text} />
                                 <div className="widget-weather-forecast__forest-info">
