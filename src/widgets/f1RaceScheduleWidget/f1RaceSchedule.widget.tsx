@@ -4,6 +4,8 @@ import { useMappingQuery } from '../../hooks/useMappingQuery'
 import { f1RaceScheduleQuery } from './f1RaceSchedule.query'
 import { F1RaceSchedule, F1RaceScheduleVariables } from './__generated__/F1RaceSchedule'
 
+import './f1RaceSchedule.scss'
+
 interface MappedRaceData {
     round: number;
     raceName: string;
@@ -14,16 +16,24 @@ interface MappedRaceData {
     hasHappened: boolean
 }
 
+function isDateInThePast(dateString: string): boolean {
+    const currentDate = new Date().setHours(0, 0, 0, 0)
+    const dateToCompareWith = new Date(dateString).setHours(0, 0, 0, 0)
+
+    return dateToCompareWith < currentDate
+}
+
 function mapRaceData(data: F1RaceSchedule): MappedRaceData[] {
     const raceData = data.f1Data.raceSchedule.races
 
     return raceData.map<MappedRaceData>((race) => {
         return {
             ...race,
-            hasHappened: false
+            hasHappened: isDateInThePast(race.date)
         }
     })
 }
+
 
 export const F1RaceScheduleWidget = () => {
     const [raceSchedule, isLoading] = useMappingQuery<F1RaceSchedule, MappedRaceData[], F1RaceScheduleVariables>({
@@ -44,15 +54,19 @@ export const F1RaceScheduleWidget = () => {
     }, [isLoading, raceSchedule])
 
     return (
-        <Fragment>
-            {!isLoading && raceSchedule.map(({ round, raceName, circuitName, hasHappened, date }, index) => {
-                return (
-                    <section key={index}>
-                        <p>{new Date(date).toDateString()}</p>
-                        <p>Has it happened yet?: {hasHappened.toString()}</p>
-                    </section>
-                )
-            })}
-        </Fragment>
+        <section className="widget-f1-race-schedule">
+            <ul className="widget-f1-race-schedule-list">
+                {!isLoading && raceSchedule.map(({ round, raceName, circuitName, hasHappened, date, }, index) => {
+                    return (
+                        <li className={`widget-f1-race-schedule__item ${hasHappened ? 'widget-f1-race-schedule__item--in-the-past' : ''}`} key={index}>
+                            <h1>{raceName}</h1>
+                            <p>{circuitName}</p>
+                            <p>{new Date(date).toDateString()}</p>
+                            {/* <p>Has it happened yet?: {hasHappened.toString()}</p> */}
+                        </li>
+                    )
+                })}
+            </ul>
+        </section>
     )
 }

@@ -1,0 +1,21 @@
+.widget-f1-race-schedule {
+    overflow: hidden;
+}
+
+.widget-f1-race-schedule-list {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0;
+    // padding: 0 0 0 1px;
+    list-style-type: none;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    height: 100%;
+}
+
+.widget-f1-race-schedule__item {
+    $d-race-block-width: 15%;
+
+    width: $d-race-block-width;
+    flex: 0 0 $d-race-block-width;
+}
