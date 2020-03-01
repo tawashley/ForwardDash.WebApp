@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react'
+import React, { useEffect } from 'react'
 import { useMappingQuery } from '../../hooks/useMappingQuery'
 
 import { f1RaceScheduleQuery } from './f1RaceSchedule.query'
