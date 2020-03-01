@@ -41,12 +41,12 @@ html {
 }
 
 .dash-grid--even-fill {
-    > * {
+    ~ * {
         display: flex;
         flex: 1;
     }
 }
 
-.forward-dash-content > * {
+.forward-dash-content ~ * {
     background: #EEE;
 }

@@ -3,6 +3,7 @@ import React from 'react';
 import { DateTimeWidget } from './widgets/dateTimeWidget/dateTime.widget'
 import { CurrentWeatherWidget } from './widgets/currentWeatherWidget/currentWeather.widget'
 import { WeatherForecastWidget } from './widgets/weatherForecastWidget/weatherForecast.widget'
+import { F1RaceScheduleWidget } from './widgets/f1RaceScheduleWidget/f1RaceSchedule.widget'
 
 import './forward-dash.scss'
 
@@ -18,9 +19,7 @@ export function ForwardDash() {
                     <WeatherForecastWidget />
                 </div>
                 <div className="dash-grid dash-grid--even-fill">
-                    <div>1/3</div>
-                    <div>1/3</div>
-                    <div>1/3</div>
+                    <F1RaceScheduleWidget />
                 </div>
             </section>
         </main>
