@@ -22,8 +22,23 @@
 }
 
 .widget-f1-race-schedule__item {
-    $d-race-block-width: 15%;
+    $d-race-block-width: 25%;
 
     width: $d-race-block-width;
     flex: 0 0 $d-race-block-width;
+    text-align: center;;
+}
+
+.widget-f1-race-schedule__circuit-icon {
+    max-width: 70%;
+    height: auto;
+}
+
+.widget-f1-race-schedule__circuit-info {
+    margin-bottom: 24px;
+    text-align: left;
+    // tablet
+    // min-height: 120px;
+
+    min-height: 70px;
 }

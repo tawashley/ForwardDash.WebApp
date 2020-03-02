@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { useMappingQuery } from '../../hooks/useMappingQuery'
 
 import { f1RaceScheduleQuery } from './f1RaceSchedule.query'
@@ -6,7 +6,55 @@ import { F1RaceSchedule, F1RaceScheduleVariables } from './__generated__/F1RaceS
 
 import { getDateSegments, toFormattedDateString, getTimeBetweenDates, DateSegments } from '../../utils/date.utils'
 
+import { ReactComponent as Australia } from './circuits/australia.svg'
+import { ReactComponent as Austria } from './circuits/austria.svg'
+import { ReactComponent as Azerbaijan } from './circuits/azerbaijan.svg'
+import { ReactComponent as Bahrain } from './circuits/bahrain.svg'
+import { ReactComponent as Belgium } from './circuits/belgium.svg'
+import { ReactComponent as Brazil } from './circuits/brazil.svg'
+import { ReactComponent as Canada } from './circuits/canada.svg'
+import { ReactComponent as China } from './circuits/china.svg'
+import { ReactComponent as France } from './circuits/france.svg'
+import { ReactComponent as Hungary } from './circuits/hungary.svg'
+import { ReactComponent as Italy } from './circuits/italy.svg'
+import { ReactComponent as Japan } from './circuits/japan.svg'
+import { ReactComponent as Mexico } from './circuits/mexico.svg'
+import { ReactComponent as Monaco } from './circuits/monaco.svg'
+import { ReactComponent as Netherlands } from './circuits/netherlands.svg'
+import { ReactComponent as Russia } from './circuits/russia.svg'
+import { ReactComponent as Singapore } from './circuits/singapore.svg'
+import { ReactComponent as Spain } from './circuits/spain.svg'
+import { ReactComponent as Uae } from './circuits/uae.svg'
+import { ReactComponent as Uk } from './circuits/uk.svg'
+import { ReactComponent as Usa } from './circuits/usa.svg'
+import { ReactComponent as Vietnam } from './circuits/vietnam.svg'
+
 import './f1RaceSchedule.scss'
+
+const circuitIconMap: { [key: string]: any} = {
+    australia: Australia,
+    austria: Austria,
+    azerbaijan: Azerbaijan,
+    bahrain: Bahrain,
+    belgium: Belgium,
+    brazil: Brazil,
+    canada: Canada,
+    china: China,
+    france: France,
+    hungary: Hungary,
+    italy: Italy,
+    japan: Japan,
+    mexico: Mexico,
+    monaco: Monaco,
+    netherlands: Netherlands,
+    russia: Russia,
+    singapore: Singapore,
+    spain: Spain,
+    uae: Uae,
+    uk: Uk,
+    usa: Usa,
+    vietnam: Vietnam
+}
 
 interface MappedRaceData {
     races: Race[]
@@ -64,33 +112,37 @@ export const F1RaceScheduleWidget = () => {
         mapFunction: mapRaceData
     })
 
+    if(isLoading) {
+        return <p>Getting F1 race schedule</p>
+    }
+
     return (
         <section className="widget-f1-race-schedule">
-            {isLoading ?
-            <p>Getting F1 race schedule</p> :
-            <Fragment>
-                {nextRace &&
-                    <div className="widget-f1-next-race">
-                        <p>Round { nextRace.round }</p>
-                        <p>{ nextRace.location }, { nextRace.country }</p>
-                        <p>in</p>
-                        <p>{ nextRace.daysUntil }</p>
-                        <p>days</p>
-                    </div>
-                }
-                <ul className="widget-f1-race-schedule-list">
-                    {races.map(({ round, raceName, circuitName, hasHappened, dateSegments, country}, index) => {
-                        return (
-                            <li className={`widget-f1-race-schedule__item ${hasHappened ? 'widget-f1-race-schedule__item--in-the-past' : ''}`} key={index}>
+            {nextRace &&
+                <div className="widget-f1-next-race">
+                    <p>Round { nextRace.round }</p>
+                    <p>{ nextRace.location }, { nextRace.country }</p>
+                    <p>in</p>
+                    <p>{ nextRace.daysUntil }</p>
+                    <p>days</p>
+                </div>
+            }
+            <ul className="widget-f1-race-schedule-list">
+                {races.map(({ round, raceName, circuitName, hasHappened, dateSegments, country}, index) => {
+                    const CircuitIcon = circuitIconMap[country.toLowerCase()]
+
+                    return (
+                        <li className={`widget-f1-race-schedule__item ${hasHappened ? 'widget-f1-race-schedule__item--in-the-past' : ''}`} key={index}>
+                            <div className="widget-f1-race-schedule__circuit-info">
                                 <h1>{country}</h1>
                                 <p>{circuitName}</p>
                                 <p>{ toFormattedDateString('{DD} {MM}', dateSegments) }</p>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </Fragment>
-            }
+                            </div>
+                            <CircuitIcon className="widget-f1-race-schedule__circuit-icon" />
+                        </li>
+                    )
+                })}
+            </ul>
         </section>
     )
 }
