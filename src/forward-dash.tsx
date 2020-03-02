@@ -15,7 +15,7 @@ export function ForwardDash() {
                     <DateTimeWidget />
                     <CurrentWeatherWidget />
                 </div>
-                <div className="dash-grid">
+                <div className="dash-grid dash-grid--content-height">
                     <WeatherForecastWidget />
                 </div>
                 <div className="dash-grid dash-grid--even-fill">
