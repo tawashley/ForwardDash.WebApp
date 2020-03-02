@@ -1,19 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { Fragment } from 'react'
 import { useMappingQuery } from '../../hooks/useMappingQuery'
 
 import { f1RaceScheduleQuery } from './f1RaceSchedule.query'
 import { F1RaceSchedule, F1RaceScheduleVariables } from './__generated__/F1RaceSchedule'
 
+import { getDateSegments, toFormattedDateString, getTimeBetweenDates, DateSegments } from '../../utils/date.utils'
+
 import './f1RaceSchedule.scss'
 
 interface MappedRaceData {
+    races: Race[]
+    nextRace?: Race
+}
+
+interface Race {
     round: number;
     raceName: string;
     circuitName: string;
     date: string;
+    dateSegments: DateSegments,
     country: string;
     location: string;
     hasHappened: boolean
+    daysUntil: number
 }
 
 function isDateInThePast(dateString: string): boolean {
@@ -23,20 +32,29 @@ function isDateInThePast(dateString: string): boolean {
     return dateToCompareWith < currentDate
 }
 
-function mapRaceData(data: F1RaceSchedule): MappedRaceData[] {
+function mapRaceData(data: F1RaceSchedule): MappedRaceData {
     const raceData = data.f1Data.raceSchedule.races
+    const races = raceData.map<Race>((race) => {
+        let dateSegments = getDateSegments(race.date)
+        let daysUntil = getTimeBetweenDates(new Date(), dateSegments.date).days
 
-    return raceData.map<MappedRaceData>((race) => {
         return {
             ...race,
-            hasHappened: isDateInThePast(race.date)
+            hasHappened: isDateInThePast(race.date),
+            dateSegments,
+            daysUntil
         }
     })
+
+    return {
+        races,
+        nextRace: races.find((race) => !race.hasHappened)
+    }
 }
 
 
 export const F1RaceScheduleWidget = () => {
-    const [raceSchedule, isLoading] = useMappingQuery<F1RaceSchedule, MappedRaceData[], F1RaceScheduleVariables>({
+    const [{ races, nextRace }, isLoading] = useMappingQuery<F1RaceSchedule, MappedRaceData, F1RaceScheduleVariables>({
         query: f1RaceScheduleQuery,
         options: {
             variables: {
@@ -46,27 +64,33 @@ export const F1RaceScheduleWidget = () => {
         mapFunction: mapRaceData
     })
 
-    useEffect(() => {
-        if(!isLoading) {
-            console.log('-----')
-            console.log(raceSchedule)
-        }
-    }, [isLoading, raceSchedule])
-
     return (
         <section className="widget-f1-race-schedule">
-            <ul className="widget-f1-race-schedule-list">
-                {!isLoading && raceSchedule.map(({ round, raceName, circuitName, hasHappened, date, }, index) => {
-                    return (
-                        <li className={`widget-f1-race-schedule__item ${hasHappened ? 'widget-f1-race-schedule__item--in-the-past' : ''}`} key={index}>
-                            <h1>{raceName}</h1>
-                            <p>{circuitName}</p>
-                            <p>{new Date(date).toDateString()}</p>
-                            {/* <p>Has it happened yet?: {hasHappened.toString()}</p> */}
-                        </li>
-                    )
-                })}
-            </ul>
+            {isLoading ?
+            <p>Getting F1 race schedule</p> :
+            <Fragment>
+                {nextRace &&
+                    <div className="widget-f1-next-race">
+                        <p>Round { nextRace.round }</p>
+                        <p>{ nextRace.location }, { nextRace.country }</p>
+                        <p>in</p>
+                        <p>{ nextRace.daysUntil }</p>
+                        <p>days</p>
+                    </div>
+                }
+                <ul className="widget-f1-race-schedule-list">
+                    {races.map(({ round, raceName, circuitName, hasHappened, dateSegments, country}, index) => {
+                        return (
+                            <li className={`widget-f1-race-schedule__item ${hasHappened ? 'widget-f1-race-schedule__item--in-the-past' : ''}`} key={index}>
+                                <h1>{country}</h1>
+                                <p>{circuitName}</p>
+                                <p>{ toFormattedDateString('{DD} {MM}', dateSegments) }</p>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </Fragment>
+            }
         </section>
     )
 }

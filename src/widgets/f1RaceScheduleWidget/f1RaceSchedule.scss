@@ -1,5 +1,12 @@
 .widget-f1-race-schedule {
     overflow: hidden;
+    display: flex;
+}
+
+.widget-f1-next-race {
+    display: flex;
+    flex-direction: column;
+    margin-right: 32px;
 }
 
 .widget-f1-race-schedule-list {
@@ -11,6 +18,7 @@
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     height: 100%;
+    flex: 1 0;
 }
 
 .widget-f1-race-schedule__item {

@@ -1,24 +1,24 @@
 import React, { createContext, useContext, FC, useEffect, useState, useMemo } from 'react';
-import { getDateSegments } from '../utils/date.utils'
+import { getDateSegments, DateSegments } from '../utils/date.utils'
 
 interface ClockState {
-    date: ReturnType<typeof getDateSegments>
+    date: DateSegments
     tickTock: boolean
 }
 
 const inititalClockState: ClockState = {
     date: {
-        year: 0,
-        month: '',
-        monthLong: '',
-        day: '',
+        year: '',
+        month: '01',
+        monthLong: 'January',
+        day: '01',
         dayString: '',
         weekDay: '',
         hour: '',
         minutes: '',
         hourMinutes: '',
         fullDate: '',
-        dateObj: new Date()
+        date: new Date()
     },
     tickTock: true
 }
