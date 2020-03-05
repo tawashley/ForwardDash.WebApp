@@ -120,10 +120,12 @@ export const F1RaceScheduleWidget = () => {
         <section className="widget-f1-race-schedule">
             {nextRace &&
                 <div className="widget-f1-next-race">
-                    <p>Round { nextRace.round }</p>
-                    <p>{ nextRace.location }, { nextRace.country }</p>
-                    <p>in</p>
-                    <p>{ nextRace.daysUntil }</p>
+                    <p className="widget-f1-next-race__round">Round { nextRace.round }</p>
+                    <div className="widget-f1-next-race__location">
+                        <strong className="widget-f1-next-race__country">{ nextRace.country }</strong>
+                        <p className="widget-f1-next-race__location-name">{ nextRace.location }</p>
+                    </div>
+                    <p className="widget-f1-next-race__count">{ nextRace.daysUntil }</p>
                     <p>days</p>
                 </div>
             }

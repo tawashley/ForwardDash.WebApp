@@ -7,6 +7,25 @@
     display: flex;
     flex-direction: column;
     margin-right: 32px;
+    text-align: center;
+    width: 15%;
+    font-size: 24px;
+}
+
+.widget-f1-next-race__country {
+    font-size: 32px;
+}
+
+.widget-f1-next-race__location {
+    margin: 18px 0;
+}
+
+.widget-f1-next-race__location-name {
+    font-size: 16px;
+}
+
+.widget-f1-next-race__count {
+    font-size: 56px;
 }
 
 .widget-f1-race-schedule-list {
