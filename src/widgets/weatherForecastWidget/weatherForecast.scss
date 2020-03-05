@@ -9,11 +9,14 @@
 }
 
 .widget-weather-forecast__forecast-item {
-    flex-grow: 1;
+    flex: 1;
     justify-items: center;
     text-align: center;
 }
 
 .widget-weather-forecast__forest-info {
-    margin-top: auto;
+}
+
+.widget-weather-forcecast__condition {
+    margin-bottom: 12px;
 }
