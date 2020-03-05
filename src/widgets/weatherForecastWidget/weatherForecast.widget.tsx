@@ -5,6 +5,8 @@ import { useMappingQuery } from '../../hooks/useMappingQuery'
 import { weatherForecastQuery } from './weatherForecast.query'
 import { Forecast, ForecastVariables, Forecast_weather_forecast } from './__generated__/Forecast'
 
+import { location } from '../../app.config'
+
 import './weatherForecast.scss'
 
 export const WeatherForecastWidget = () => {
@@ -12,7 +14,7 @@ export const WeatherForecastWidget = () => {
         query: weatherForecastQuery,
         options: {
             variables: {
-                location: 'London',
+                location,
                 days: '7'
             }
         },

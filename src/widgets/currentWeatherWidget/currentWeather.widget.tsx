@@ -5,6 +5,8 @@ import { useMappingQuery } from '../../hooks/useMappingQuery'
 import { currentWeatherQuery } from './currentWeather.query'
 import { CurrentWeather, CurrentWeatherVariables, CurrentWeather_weather_current } from './__generated__/CurrentWeather'
 
+import { location } from '../../app.config'
+
 import './currentWeather.scss'
 
 export const CurrentWeatherWidget = () => {
@@ -12,7 +14,7 @@ export const CurrentWeatherWidget = () => {
         query: currentWeatherQuery,
         options: {
             variables: {
-                location: 'London'
+                location
             }
         },
         mapFunction: (data) => data.weather.current
