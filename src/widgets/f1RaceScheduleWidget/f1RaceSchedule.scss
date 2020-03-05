@@ -1,12 +1,15 @@
 .widget-f1-race-schedule {
     overflow: hidden;
     display: flex;
+    padding: 16px 0;
 }
 
 .widget-f1-next-race {
     display: flex;
     flex-direction: column;
-    margin-right: 32px;
+    margin-right: 16px;
+    padding-right: 16px;
+    border-right: 1px solid #CCC;
     text-align: center;
     width: 15%;
     font-size: 24px;
@@ -32,7 +35,6 @@
     display: flex;
     flex-wrap: nowrap;
     margin: 0;
-    // padding: 0 0 0 1px;
     list-style-type: none;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
@@ -45,7 +47,11 @@
 
     width: $d-race-block-width;
     flex: 0 0 $d-race-block-width;
-    text-align: center;;
+    text-align: center;
+
+    &:last-child {
+        margin-right: 16px;
+    }
 }
 
 .widget-f1-race-schedule__circuit-icon {
