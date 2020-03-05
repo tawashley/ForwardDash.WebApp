@@ -33,8 +33,7 @@ export const WeatherForecastWidget = () => {
                                 <p className="widget-weather-forcecast__condition">{dayForecast.condition.text}</p>
                                 <img src={dayForecast.condition.iconSrc} alt={dayForecast.condition.text} />
                                 <div className="widget-weather-forecast__forest-info">
-                                    <p>Max: { dayForecast.maxTemperature.celsius } °C</p>
-                                    <p>Min: { dayForecast.minTemperature.celsius } °C</p>
+                                    <p>{ dayForecast.maxTemperature.celsius } °C / { dayForecast.minTemperature.celsius } °C</p>
                                 </div>
                             </li>
                         )
