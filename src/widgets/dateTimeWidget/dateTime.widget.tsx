@@ -6,7 +6,7 @@ import './dateTime.widget.scss'
 
 const DateTimeWidgetContainer = () => {
     const { date, tickTock } = useClock()
-    const { weekDay, dayString, monthLong, year, minutes, hour } = date
+    const { weekDay, dayString, monthLong, minutes, hour } = date
 
     return (
         <section className="widget-date-time">
