@@ -11,7 +11,7 @@ const DateTimeWidgetContainer = () => {
     return (
         <section className="widget-date-time">
             <h1 className="widget-date-time__date">
-                {weekDay} {dayString} {monthLong} {year}
+                {weekDay} {dayString} {monthLong}
             </h1>
             <p className="widget-date-time__time">
                 {hour}{tickTock ? ':' : ' ' }{minutes}
