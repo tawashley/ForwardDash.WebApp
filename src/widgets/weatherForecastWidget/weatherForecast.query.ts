@@ -20,6 +20,7 @@ export const weatherForecastQuery = gql`
                 }
                 condition {
                     text
+                    id
                     iconSrc
                 }
             }

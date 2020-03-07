@@ -67,6 +67,10 @@ export interface DateSegments {
      */
     weekDay: string
     /**
+     * The short weekday e.g. 'Mon'
+     */
+    weekDayShort: string
+    /**
      * The day of the month with the appropriate suffix e.g. '9th'
      */
     dayString: string
@@ -153,6 +157,12 @@ function getWeekday(weekDay: number) {
     return weekDayMap[weekDay];
 }
 
+function getWeekdayShort(weekDay: number) {
+    const weekDayMap = ['Sun','Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat']
+
+    return weekDayMap[weekDay];
+}
+
 /**
  * Takes a format placeholder string along with dateSegments and returns a formatted string.
  *
@@ -168,6 +178,8 @@ function getWeekday(weekDay: number) {
  *  - `{DD}` -> `31st`(day string)
  *  - `{h}` -> `16` (hour number, 2 digits)
  *  - `{m}` -> `04` (minute number, 2 digits)
+ *  - `{day}` -> `Monday` (full week day)
+ *  - `{shortDay}` -> `Mon` (short week day)
  *
  * @example
  * toFormattedDateString('{DD} {MM} {YYYY}', dateSegments) //e.g. '31st January 1970'
@@ -181,6 +193,8 @@ export function toFormattedDateString(formatPlaceholder: string, dateSegments: D
         .replace(/\{DD\}/g, dateSegments.dayString)
         .replace(/\{h\}/g, dateSegments.hour)
         .replace(/\{m\}/g, dateSegments.minutes)
+        .replace(/\{day\}/g, dateSegments.weekDay)
+        .replace(/\{shortDay\}/g, dateSegments.weekDayShort)
 }
 
 /**
@@ -209,12 +223,14 @@ export function getDateSegments(dateConstructorValue?: number | string | Date): 
     const dayString = getDayString(date.getDate())
     const monthLong = monthLongToLetters(date.getMonth())
     const weekDay = getWeekday(date.getDay())
+    const weekDayShort = getWeekdayShort(date.getDay())
 
     return {
         year,
         month,
         monthLong,
         weekDay,
+        weekDayShort,
         day,
         dayString,
         hour,

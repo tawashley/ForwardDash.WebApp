@@ -15,12 +15,26 @@
 .widget-weather-forecast__forecast-item {
     flex: 1;
     justify-items: center;
-    text-align: center;
 }
 
-.widget-weather-forecast__forest-info {
+.widget-weather-forecast__forecast-info {
+    display: flex;
 }
 
-.widget-weather-forcecast__condition {
-    margin-bottom: 12px;
+.widget-weather-forecast__forecast-details {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 12px;
+
+    & > * {
+        width: 100%;
+    }
+}
+
+.widget-weather-forecast__forecast-condition {
+    line-height: 0;
+}
+
+.widget-weather-forecast__forecast-date {
+    margin-bottom: 16px;
 }

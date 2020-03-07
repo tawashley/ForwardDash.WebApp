@@ -14,11 +14,12 @@ const inititalClockState: ClockState = {
         day: '01',
         dayString: '',
         weekDay: '',
+        weekDayShort: '',
         hour: '',
         minutes: '',
         hourMinutes: '',
         fullDate: '',
-        date: new Date()
+        date: new Date(),
     },
     tickTock: true
 }

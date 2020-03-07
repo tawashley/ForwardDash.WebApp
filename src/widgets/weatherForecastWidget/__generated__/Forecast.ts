@@ -25,6 +25,7 @@ export interface Forecast_weather_forecast_averageTemperature {
 export interface Forecast_weather_forecast_condition {
   __typename: "WeatherCondition";
   text: string;
+  id: string;
   iconSrc: string;
 }
 
