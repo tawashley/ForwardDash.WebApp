@@ -16,6 +16,9 @@ const DateTimeWidgetContainer = () => {
             <p className="widget-date-time__time">
                 {hour}{tickTock ? ':' : ' ' }{minutes}
             </p>
+            <button onClick={() => { document.querySelector('html')?.requestFullscreen() }}>
+                Full screen
+            </button>
         </section>
     )
 }
