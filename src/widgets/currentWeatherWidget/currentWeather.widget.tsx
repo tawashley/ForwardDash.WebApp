@@ -28,12 +28,12 @@ export const CurrentWeatherWidget = () => {
                 <Fragment>
                     <img src={condition.iconSrc} alt={condition.text} />
                     <div className="widget-current-weather__main-panel">
-                        <p className="widget-current-weather__temperature">{temperature.celsius}</p>
+                        <p className="widget-current-weather__temperature">{temperature.celsius.toFixed(0)}</p>
                         <span className="widget-current-weather__symbol">°C</span>
                     </div>
                     <div className="widget-current-weather__side-panel">
                         <p className="widget-current-weather__condition">{condition.text}</p>
-                        <p>Feels like {feelsLike.celsius}°C</p>
+                        <p>Feels like {feelsLike.celsius.toFixed(0)}°C</p>
                         <p>Humidity: {humidityPercentage}%</p>
                     </div>
                 </Fragment>
