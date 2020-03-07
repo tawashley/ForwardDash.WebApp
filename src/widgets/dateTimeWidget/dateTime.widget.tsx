@@ -12,13 +12,19 @@ const DateTimeWidgetContainer = () => {
         <section className="widget-date-time">
             <h1 className="widget-date-time__date">
                 {weekDay} {dayString} {monthLong}
+                <button onClick={() => {
+                      if (!document.fullscreenElement) {
+                        document.documentElement.requestFullscreen();
+                      } else {
+                          document.exitFullscreen();
+                      }
+                 }}>
+                    Full screen
+                </button>
             </h1>
             <p className="widget-date-time__time">
                 {hour}{tickTock ? ':' : ' ' }{minutes}
             </p>
-            <button onClick={() => { document.querySelector('html')?.requestFullscreen() }}>
-                Full screen
-            </button>
         </section>
     )
 }
