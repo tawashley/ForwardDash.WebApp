@@ -26,13 +26,13 @@ const WeatherForecastItem = ({forecast}: WeatherForecastItemProps) => {
             <p className="widget-weather-forecast__forecast-date">
                 { weekDayShort } { dayString }
             </p>
+            <p className="widget-weather-forecast__forecast-text">{forecast.condition.text}</p>
             <section className="widget-weather-forecast__forecast-info">
                 <div className="widget-weather-forecast__forecast-condition">
                     <WeatherIcon className={`widget-weather-forecast__forecast-condition-icon widget-weather-forecast__forecast-condition-icon--${conditionId}`} />
                 </div>
 
                 <div className="widget-weather-forecast__forecast-details">
-                    <p>{forecast.condition.text}</p>
                     <strong>{ forecast.maxTemperature.celsius.toFixed(0) } °C</strong>
                     <p>{ forecast.minTemperature.celsius.toFixed(0) } °C</p>
                 </div>
