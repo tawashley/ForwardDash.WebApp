@@ -2,6 +2,9 @@ import { ReactComponent as Sunny } from '../assets/svgs/weather-icons/wi-day-sun
 import { ReactComponent as PartlyCloudy } from '../assets/svgs/weather-icons/wi-cloud.svg'
 import { ReactComponent as Cloudy } from '../assets/svgs/weather-icons/wi-cloudy.svg'
 import { ReactComponent as Rain } from '../assets/svgs/weather-icons/wi-rain.svg'
+import { ReactComponent as Showers } from '../assets/svgs/weather-icons/wi-showers.svg'
+import { ReactComponent as Thunderstorm } from '../assets/svgs/weather-icons/wi-thunderstorm.svg'
+import { ReactComponent as Fog } from '../assets/svgs/weather-icons/wi-fog.svg'
 import { ReactComponent as __DEFAULT_ICON_NEEDS_MAPPING } from '../assets/svgs/weather-icons/wi-moon-alt-new.svg'
 
 interface WeatherIconMap {
@@ -12,7 +15,7 @@ export const weatherIconMap: WeatherIconMap = {
     'blizzard': __DEFAULT_ICON_NEEDS_MAPPING,
     'cloudy': Cloudy,
     'drizzle-possible': __DEFAULT_ICON_NEEDS_MAPPING,
-    'fog': __DEFAULT_ICON_NEEDS_MAPPING,
+    'fog': Fog,
     'freezing-drizzle': __DEFAULT_ICON_NEEDS_MAPPING,
     'freezing-fog': __DEFAULT_ICON_NEEDS_MAPPING,
     'freezing-rain': __DEFAULT_ICON_NEEDS_MAPPING,
@@ -26,7 +29,7 @@ export const weatherIconMap: WeatherIconMap = {
     'light-rain-thunder': __DEFAULT_ICON_NEEDS_MAPPING,
     'light-rain': Rain,
     'light-sheet-showers': __DEFAULT_ICON_NEEDS_MAPPING,
-    'light-showers': Rain,
+    'light-showers': Showers,
     'light-sleet': __DEFAULT_ICON_NEEDS_MAPPING,
     'light-snow-patchy': __DEFAULT_ICON_NEEDS_MAPPING,
     'light-snow-showers': __DEFAULT_ICON_NEEDS_MAPPING,
@@ -37,7 +40,7 @@ export const weatherIconMap: WeatherIconMap = {
     'moderate-ice-pellet-showers': __DEFAULT_ICON_NEEDS_MAPPING,
     'moderate-rain-thunder': __DEFAULT_ICON_NEEDS_MAPPING,
     'moderate-rain': Rain,
-    'moderate-showers': __DEFAULT_ICON_NEEDS_MAPPING,
+    'moderate-showers': Rain,
     'moderate-sleet-showers': __DEFAULT_ICON_NEEDS_MAPPING,
     'moderate-sleet': __DEFAULT_ICON_NEEDS_MAPPING,
     'moderate-snow-showers': __DEFAULT_ICON_NEEDS_MAPPING,
@@ -54,6 +57,6 @@ export const weatherIconMap: WeatherIconMap = {
     'snow-possible': __DEFAULT_ICON_NEEDS_MAPPING,
     'snow': __DEFAULT_ICON_NEEDS_MAPPING,
     'sunny': Sunny,
-    'thunder': __DEFAULT_ICON_NEEDS_MAPPING,
-    'torrential-showers': Rain,
+    'thunder': Thunderstorm,
+    'torrential-showers': Showers,
 }
