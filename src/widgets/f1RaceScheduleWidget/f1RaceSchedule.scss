@@ -40,10 +40,17 @@
     scroll-snap-type: x mandatory;
     height: 100%;
     flex: 1 0;
+
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+
+    &::-webkit-scrollbar {
+        display: none; /* Chrome Safari */
+    }
 }
 
 .widget-f1-race-schedule__item {
-    $d-race-block-width: 25%;
+    $d-race-block-width: 30%;
 
     width: $d-race-block-width;
     flex: 0 0 $d-race-block-width;
