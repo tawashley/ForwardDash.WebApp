@@ -65,7 +65,7 @@ export const useMappingQuery = <TData = any, TMappedData = any, TVariables = Ope
 }
 
 export const useMappingLazyQuery = <TData = any, TMappedData = any, TVariables = OperationVariables>({ query, options = {}, mapFunction }: MappingQueryOptions<TData, TVariables, TMappedData>): [(options?: QueryLazyOptions<TVariables> | undefined) => void, TMappedData, boolean, QueryResult<TData, TVariables>] => {
-    const [makeQuery ,apolloResult] = useLazyQuery<TData, TVariables>(query, options)
+    const [makeQuery, apolloResult] = useLazyQuery<TData, TVariables>(query, options)
     const [mappedData, setMappedData] = useState<TMappedData>({} as TMappedData)
     const [isLoading, setIsLoading] = useState(true);
 
