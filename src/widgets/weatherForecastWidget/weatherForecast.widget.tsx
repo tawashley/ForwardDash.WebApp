@@ -9,6 +9,7 @@ import { location } from '../../app.config'
 
 import './weatherForecast.scss'
 import { getDateSegments } from '../../utils/date.utils'
+import { weatherIconMap } from '../../utils/weather-icons'
 
 interface WeatherForecastItemProps {
     forecast: Forecast_weather_forecast
@@ -16,6 +17,9 @@ interface WeatherForecastItemProps {
 
 const WeatherForecastItem = ({forecast}: WeatherForecastItemProps) => {
     const { weekDayShort, dayString } = getDateSegments(forecast.date)
+    const conditionId = forecast.condition.id
+
+    const WeatherIcon = weatherIconMap[conditionId]
 
     return (
         <li className="widget-weather-forecast__forecast-item">
@@ -24,7 +28,7 @@ const WeatherForecastItem = ({forecast}: WeatherForecastItemProps) => {
             </p>
             <section className="widget-weather-forecast__forecast-info">
                 <div className="widget-weather-forecast__forecast-condition">
-                    <img src={forecast.condition.iconSrc} alt={forecast.condition.text} />
+                    <WeatherIcon className={`widget-weather-forecast__forecast-condition-icon widget-weather-forecast__forecast-condition-icon--${conditionId}`} />
                 </div>
 
                 <div className="widget-weather-forecast__forecast-details">

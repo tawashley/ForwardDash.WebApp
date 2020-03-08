@@ -33,8 +33,16 @@
 
 .widget-weather-forecast__forecast-condition {
     line-height: 0;
+    display: flex;
+    align-items: center;
 }
 
 .widget-weather-forecast__forecast-date {
     margin-bottom: 16px;
+}
+
+.widget-weather-forecast__forecast-condition-icon {
+    height: 40px;
+    width: 40px;
+    fill: #4A63D9;
 }

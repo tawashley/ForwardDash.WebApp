@@ -6,6 +6,7 @@ import { currentWeatherQuery } from './currentWeather.query'
 import { CurrentWeather, CurrentWeatherVariables, CurrentWeather_weather_current } from './__generated__/CurrentWeather'
 
 import { location } from '../../app.config'
+import { weatherIconMap } from '../../utils/weather-icons'
 
 import './currentWeather.scss'
 
@@ -20,13 +21,19 @@ export const CurrentWeatherWidget = () => {
         mapFunction: (data) => data.weather.current
     })
 
+    const renderIcon = () => {
+        const WeatherIcon = weatherIconMap[condition.id]
+
+        return <WeatherIcon className={`widget-curent-weather__icon widget-curent-weather__icon--${condition.id}`} />
+    }
+
     return (
         <section className="widget-current-weather">
             {isLoading ? (
                 <p>Loading current forecast</p>
             ) : (
                 <Fragment>
-                    <img src={condition.iconSrc} alt={condition.text} />
+                    { condition ? renderIcon() : <Fragment/> }
                     <div className="widget-current-weather__main-panel">
                         <p className="widget-current-weather__temperature">{temperature.celsius.toFixed(0)}</p>
                         <span className="widget-current-weather__symbol">°C</span>

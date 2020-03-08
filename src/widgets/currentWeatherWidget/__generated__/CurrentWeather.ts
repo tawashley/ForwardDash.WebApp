@@ -23,6 +23,7 @@ export interface CurrentWeather_weather_current_condition {
   __typename: "WeatherCondition";
   text: string;
   iconSrc: string;
+  id: string;
 }
 
 export interface CurrentWeather_weather_current {

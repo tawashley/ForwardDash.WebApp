@@ -17,6 +17,7 @@ export const currentWeatherQuery = gql`
                 condition {
                     text
                     iconSrc
+                    id
                 }
             }
         }

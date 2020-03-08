@@ -1,1 +1,1 @@
-export const location = process.env.location || 'London'
+export const location = process.env.location || 'Manchester'
