@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState, useCallback } from 'react'
 
 import { useMappingLazyQuery } from '../../hooks/useMappingQuery'
+import { useInterval } from '../../hooks/useInterval'
 
 import { currentWeatherQuery } from './currentWeather.query'
 import { CurrentWeather, CurrentWeatherVariables, CurrentWeather_weather_current } from './__generated__/CurrentWeather'
@@ -20,7 +21,6 @@ export const CurrentWeatherWidget = () => {
         },
         mapFunction: (data) => data.weather.current
     })
-
     const getMillisecondsUntilNextHour = useCallback(() => {
         const currentDate = new Date()
         const currentDataPlusOneHour = new Date()
@@ -30,28 +30,18 @@ export const CurrentWeatherWidget = () => {
         currentDataPlusOneHour.setSeconds(0)
         currentDataPlusOneHour.setMilliseconds(0)
 
-        console.log(currentDataPlusOneHour.getTime() - currentDate.getTime())
-
         return currentDataPlusOneHour.getTime() - currentDate.getTime()
     }, [])
-
-    const [tickTock, setTickTock] = useState(new Date().getTime())
-
-    // query for the current weather every hour, on the hour after initial mounting of component
-    const setQueryTimeout = useCallback(() => {
-        setTimeout(() => {
-            makeWeatherQuery()
-            setTickTock(new Date().getTime())
-        }, getMillisecondsUntilNextHour())
-    }, [getMillisecondsUntilNextHour, makeWeatherQuery])
+    const [msUntilNextHour, setMsUntilNextHour] = useState(getMillisecondsUntilNextHour())
 
     useEffect(() => {
         makeWeatherQuery()
-    },  [makeWeatherQuery])
+    }, [makeWeatherQuery])
 
-    useEffect(() => {
-        setQueryTimeout()
-    }, [tickTock, setQueryTimeout])
+    useInterval(() => {
+        makeWeatherQuery()
+        setMsUntilNextHour(getMillisecondsUntilNextHour())
+    }, msUntilNextHour)
 
     const renderIcon = () => {
         const WeatherIcon = weatherIconMap[condition.id]
