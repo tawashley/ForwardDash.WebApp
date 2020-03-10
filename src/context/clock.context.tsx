@@ -1,6 +1,8 @@
 import React, { createContext, useContext, FC, useEffect, useState, useMemo } from 'react';
 import { getDateSegments, DateSegments } from '../utils/date.utils'
 
+import { useInterval } from '../hooks/useInterval'
+
 interface ClockState {
     date: DateSegments
     tickTock: boolean
@@ -35,13 +37,7 @@ export const ClockProvider: FC = ({ children }) => {
         setTickTock(!tickTock)
     }
 
-    useEffect(() => {
-        var timerID = setInterval(() => tick(), 1000);
-
-        return function cleanup() {
-            clearInterval(timerID);
-        };
-    })
+    useInterval(tick, 1000)
 
     const contextValue = useMemo<ClockState>(() => {
         return {
