@@ -1,4 +1,4 @@
-.widget-current-weather {
+.widget-current-weather-inner {
     display: flex;
     align-items: center;
 }
@@ -19,6 +19,7 @@
 
 .widget-current-weather__side-panel {
     margin-left: 16px;
+    text-align: righr;
 }
 
 .widget-current-weather__condition {
@@ -30,4 +31,11 @@
     width: 72px;
     height: 72px;
     fill: #4A63D9;
+}
+
+.widget-current-weather__last-updated {
+    text-align: right;
+    padding: 8px;
+    font-style: italic;
+    font-size: 12px;
 }
